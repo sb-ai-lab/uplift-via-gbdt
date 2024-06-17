@@ -1,0 +1,89 @@
+# general params
+experiment: 'final'
+n_runs: 5
+
+# hyperparams search params
+optuna:
+  n_startup_trials: 20
+  multivariate: True
+  n_trials: 50
+  timeout: 10000
+
+
+# default params for all the frameworks
+xgb:
+  n_estimators: 500
+  learning_rate: 0.01
+  max_depth: 6
+  tree_method: 'hist'
+  min_child_weight: 0
+  lambda: 1
+  max_bin: 256
+  gamma: 0
+  alpha: 0
+  n_jobs: 12
+
+lgb:
+  n_estimators: 500
+  learning_rate: 0.01
+  num_leaves: 255
+  max_depth: 6
+  min_child_samples: 1
+  reg_lambda: 1
+  max_bin: 256
+  min_split_gain: 0
+  reg_alpha: 0
+
+pb:
+  ntrees: 500
+  lr: 0.01
+  verbose: 1000
+  es: 0
+  lambda_l2: 1
+  gd_steps: 1
+  subsample: 1
+  colsample: 1
+  min_data_in_leaf: 1
+  use_hess: True
+  max_bin: 256
+  max_depth: 6
+
+crf:
+  n_estimators: 500
+  min_samples_split: 10
+  criterion: 'mse'
+  max_depth: 10
+  min_samples_leaf: 100
+  max_features: 0.3
+  max_samples: 0.5
+  min_balancedness_tol: 0.2
+  honest: True
+  n_jobs: 40
+
+dr:
+  hidden_scale: 2.
+  outcome_scale: .5
+  alpha: 1.0
+  beta: 1.0
+  epochs: 30
+  batch_size: 256
+  learning_rate: 1e-3
+  data_loader_num_workers: 4
+  loss_type: 'tarreg'
+  device: 'cuda'
+
+dcn:
+  epochs: 10
+  lr: 0.001
+  steps_per_epoch: 150
+  prpsy_w: 0.5
+  escvr1_w: 0.5
+  escvr0_w: 1
+  h1_w: 0
+  h0_w: 0
+  mu0hat_w: 0.5
+  mu1hat_w: 1
+  share_scale: 2
+  base_scale: .5
+  data_loader_num_workers: 4
+  device: 'cuda'

@@ -1,0 +1,7 @@
+py-boost==0.5.1
+scikit-uplift==0.5.1
+openml==0.14.2
+causalml==0.15.1
+econml==0.15.0
+optuna==3.6.1
+geomloss=0.2.6
