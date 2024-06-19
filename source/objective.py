@@ -179,7 +179,7 @@ class ObjectiveDR(Objective):
 
         params['alpha'] = trial.suggest_float("alpha", .5, 1.5)
         params['beta'] = trial.suggest_float("beta", .5, 1.5)
-        params['batch_size'] = 2 ** trial.suggest_int("batch_size", 5, 10)
+        params['steps_per_epoch'] = trial.suggest_int("steps_per_epoch", 100, 300)
 
         params['learning_rate'] = trial.suggest_float("learning_rate", 1e-4, 1e-3)
 

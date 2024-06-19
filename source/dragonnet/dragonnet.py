@@ -28,8 +28,8 @@ class DragonNet:
         targeted regularization hyperparameter between 0 and 1
     epochs: int, default=200
         Number training epochs
-    batch_size: int, default=64
-        Training batch size
+    steps_per_epoch: int, default=100
+        Number of steps per epoch to scale batch size
     learning_rate: float, default=1e-3
         Learning rate
     data_loader_num_workers: int, default=4
@@ -45,7 +45,7 @@ class DragonNet:
             alpha=1.0,
             beta=1.0,
             epochs=200,
-            batch_size=64,
+            steps_per_epoch=100,
             learning_rate=1e-5,
             data_loader_num_workers=4,
             loss_type="tarreg",
@@ -61,7 +61,8 @@ class DragonNet:
         self.outcome_scale = outcome_scale
         self.learning_rate = learning_rate
         self.epochs = epochs
-        self.batch_size = batch_size
+        self.steps_per_epoch = steps_per_epoch
+        self.batch_size = None
         self.num_workers = data_loader_num_workers
         self.train_dataloader = None
         self.valid_dataloader = None
@@ -86,7 +87,10 @@ class DragonNet:
     def create_model(self, x):
 
         x = self.preprocess(x)
-        input_dim = x.shape[1]
+        nrows, input_dim = x.shape
+
+        self.batch_size = max(32, int(nrows / self.steps_per_epoch))
+
         shared_hidden = max(int(self.hidden_scale * input_dim), 4)
         outcome_hidden = max(int(self.outcome_scale * shared_hidden), 2)
         self.model = DragonNetBase(input_dim, shared_hidden, outcome_hidden).to(self.device)
