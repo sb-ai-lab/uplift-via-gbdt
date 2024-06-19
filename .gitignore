@@ -3,7 +3,7 @@ datasets/*/
 rapids-24.04/
 experiment/
 final*/
-visualization_utils*
+visualization_*
 Results.ipynb
 synthetic.ipynb
 w_vs_auuc.png
